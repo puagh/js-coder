@@ -1,8 +1,6 @@
-function formatoMoneda(precio){
-    return Number(precio).toFixed(2)
-}
+const formatoMoneda = (precio) => Number(precio).toFixed(2)
 
-function agregarProducto({producto}){
+const agregarProducto = ({producto}) =>{
     const {nombre, cantidad, precio} = producto
     let fila = document.createElement("tr")
     fila.setAttribute("class", "producto")
@@ -13,9 +11,7 @@ function agregarProducto({producto}){
     document.querySelector("#listaProductos").appendChild(fila)
 }
 
-function agregarALocal(arregloProductos){
-    localStorage.setItem("listaProductos", JSON.stringify(arregloProductos))
-}
+const agregarALocal = (arregloProductos) => localStorage.setItem("listaProductos", JSON.stringify(arregloProductos))
 
 const traerContenidoLocal = () => JSON.parse(localStorage.getItem("listaProductos"))
 
@@ -26,23 +22,26 @@ const limpiarFormlulario = () =>{
 }
 
 const renderTabla = (arregloProductos) =>{
-    console.table(arregloProductos)
-    for(let producto of arregloProductos){
-        console.log(producto.nombre)
-    }
+    arregloProductos.forEach((productoEnArreglo)=>{
+        let {producto} = productoEnArreglo
+        const {nombre, cantidad, precio} = producto
+        let fila = document.createElement("tr")
+        fila.setAttribute("class", "producto")
+        fila.innerHTML = `<td>${nombre}</td>
+                                <td>${cantidad}</td>
+                                <td>${precio}</td>
+                                <td>${formatoMoneda(Number(cantidad)*Number(precio))}</td>`
+        document.querySelector("#listaProductos").appendChild(fila)
+    })
 }
-
 //###################################################################
 let arregloProductos = []
-const datosLocales = traerContenidoLocal()
+let datosLocales = traerContenidoLocal()
 
 if(datosLocales){
     arregloProductos = datosLocales
     renderTabla(arregloProductos)
 }
-
-console.table(arregloProductos)
-
 
 document.getElementById("agregarProducto").addEventListener("click", (event)=>{
     event.preventDefault();
@@ -51,7 +50,6 @@ document.getElementById("agregarProducto").addEventListener("click", (event)=>{
     const precio = formatoMoneda(document.querySelector("#inputPrecioProducto").value)
     const producto = {nombre, cantidad, precio}
     arregloProductos.push({producto})
-    console.table(arregloProductos)
     limpiarFormlulario()
     agregarProducto({producto})
     agregarALocal(arregloProductos)
