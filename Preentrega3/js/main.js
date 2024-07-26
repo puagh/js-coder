@@ -1,36 +1,58 @@
-/*function formatoMoneda(precio){
+function formatoMoneda(precio){
     return Number(precio).toFixed(2)
 }
 
-function imprimir(arregloProductos){
-    let cadena = ""
-    arregloProductos.forEach(producto => {
-        cadena += `Producto: ${producto.descripcion}: Precio: $${formatoMoneda(producto.precio)}\n`
-    });
-    alert(cadena)
+function agregarProducto({producto}){
+    const {nombre, cantidad, precio} = producto
+    let fila = document.createElement("tr")
+    fila.setAttribute("class", "producto")
+    fila.innerHTML = `<td>${nombre}</td>
+                            <td>${cantidad}</td>
+                            <td>${precio}</td>
+                            <td>${formatoMoneda(Number(cantidad)*Number(precio))}</td>`
+    document.querySelector("#listaProductos").appendChild(fila)
 }
 
-function buscar(arregloProductos){
-    const buscar = prompt("Ingresa el nombre del producto que deseas buscar: ")
-    const encontrado = arregloProductos.filter( producto => producto.descripcion.includes(buscar))
-    console.log(encontrado)
-    const numeroResultados = encontrado.length
-    console.log(numeroResultados)
-    if(numeroResultados > 0){
-        alert("se encontraron x resultados")
-    } else{
-        alert("no hubo coincidencias")
+function agregarALocal(arregloProductos){
+    localStorage.setItem("listaProductos", JSON.stringify(arregloProductos))
+}
+
+const traerContenidoLocal = () => JSON.parse(localStorage.getItem("listaProductos"))
+
+const limpiarFormlulario = () =>{
+    document.querySelector("#inputNombreProducto").value = ""
+    document.querySelector("#inputCantidadProducto").value = ""
+    document.querySelector("#inputPrecioProducto").value = ""
+}
+
+const renderTabla = (arregloProductos) =>{
+    console.table(arregloProductos)
+    for(let producto of arregloProductos){
+        console.log(producto.nombre)
     }
 }
 
-let i = 0
-let nombreProducto = ""
-let precioProducto = 0
+//###################################################################
+let arregloProductos = []
+const datosLocales = traerContenidoLocal()
 
-const arregloProductos = []*/
+if(datosLocales){
+    arregloProductos = datosLocales
+    renderTabla(arregloProductos)
+}
+
+console.table(arregloProductos)
+
 
 document.getElementById("agregarProducto").addEventListener("click", (event)=>{
     event.preventDefault();
-    console.log("Hola mundo!")
+    const nombre = document.querySelector("#inputNombreProducto").value
+    const cantidad = document.querySelector("#inputCantidadProducto").value
+    const precio = formatoMoneda(document.querySelector("#inputPrecioProducto").value)
+    const producto = {nombre, cantidad, precio}
+    arregloProductos.push({producto})
+    console.table(arregloProductos)
+    limpiarFormlulario()
+    agregarProducto({producto})
+    agregarALocal(arregloProductos)
 })
-
