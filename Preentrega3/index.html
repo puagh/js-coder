@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preeentrega 3</title>
+</head>
+<body>
+    <header>
+        <h1>App de punto de venta</h1>    
+    </header>
+    <main>
+        <h2>Agrega al formulario los datos del producto, cantidad al final calcula el total y genera la venta</h2>
+        <form action="#">
+            <div>
+                <label for="inputNombreProducto">Nombre del producto</label>
+                <input type="text" name="inputNombreProducto" id="inputNombreProducto">
+
+                <label for="inputCantidadProducto">Cantidad</label>
+                <input type="number" name="inputCantidadProducto" id="inputCantidadProducto" min="1" max="100">
+
+                <label for="inputPrecioProducto">Precio del producto</label>
+                <input type="number" name="inputPrecioProducto" id="inputPrecioProducto" min="1">
+            </div>
+            <button type="reset">Reset</button><button type="submit" id="agregarProducto">Agregar producto</button>
+        </form>
+        <hr>
+        <div class="contenedor">
+            <h2>Venta</h2>
+            <div id="ventas">
+
+            </div>
+        </div>
+        
+
+    </main>
+    <footer>
+        <p>Realizado por Hector Leon 2024</p>
+    </footer>
+    <script src="./js/main.js"></script>
+</body>
+</html>
