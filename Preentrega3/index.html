@@ -4,32 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preeentrega 3</title>
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
 </head>
 <body>
     <header>
-        <h1>App de punto de venta</h1>    
+        <h1>App Lista de Productos</h1>    
     </header>
     <main>
-        <h2>Agrega al formulario los datos del producto, cantidad al final calcula el total y genera la venta</h2>
+        <h2>Agrega al formulario los datos del producto, cantidad y precio, clickea en el boton agregar para calcular y mostrar el subtotal de cada producto</h2>
         <form action="#">
             <div>
                 <label for="inputNombreProducto">Nombre del producto</label>
-                <input type="text" name="inputNombreProducto" id="inputNombreProducto">
+                <input type="text" name="inputNombreProducto" id="inputNombreProducto" required>
 
                 <label for="inputCantidadProducto">Cantidad</label>
-                <input type="number" name="inputCantidadProducto" id="inputCantidadProducto" min="1" max="100">
+                <input type="number" name="inputCantidadProducto" id="inputCantidadProducto" min="1" max="100" required>
 
                 <label for="inputPrecioProducto">Precio del producto</label>
-                <input type="number" name="inputPrecioProducto" id="inputPrecioProducto" min="1">
+                <input type="number" name="inputPrecioProducto" id="inputPrecioProducto" min="1" required>
             </div>
             <button type="reset">Reset</button><button type="submit" id="agregarProducto">Agregar producto</button>
         </form>
         <hr>
         <div class="contenedor">
-            <h2>Venta</h2>
-            <div id="ventas">
+            <h2>Lista de productos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Subtotal</th>
+                      </tr>
+                </thead>
+                <tbody id="listaProductos">
 
-            </div>
+                </tbody>
+            </table>
         </div>
         
 
